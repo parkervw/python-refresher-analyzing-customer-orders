@@ -1,3 +1,7 @@
+# Python Refresher Course: Project 1: Analyzing Customer Orders
+# Author: Parker Van Wagoner
+# Date: February 2026
+ 
 customers = [
 	"Ava Mitchell",
 	"Noah Parker",
