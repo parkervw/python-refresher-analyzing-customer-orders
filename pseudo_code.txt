@@ -1,0 +1,220 @@
+Situation
+You are working as a data analyst for an e-commerce company. Your task is to process
+and analyze customer orders to generate meaningful insights. Your company sells a
+variety of products across different categories, such as Electronics, Clothing, and Home
+Essentials. You need to determine which products are frequently purchased, classify
+customers based on their total spending, and analyze the most profitable product
+categories.
+To achieve this, you will store, categorize, and analyze customer purchase data using
+Python's built-in data structures (lists, tuples, dictionaries, and sets) and control
+structures (loops and conditionals). The final output will help business managers make
+data-driven decisions regarding marketing strategies and inventory management.
+
+Tasks
+1. Store customer orders
+• Create a list of customer names
+• Store each customer's order details (customer name, product, price, category) as
+tuples inside a list
+• Use a dictionary where keys are customer names and values are lists of ordered
+products
+
+<my_psuedo_code>
+    customers = [a, b, c]
+    transaction_logs = [
+        (a, product, price, category),
+        (b, product, price, category),
+        (c, product, price, category),
+        (a, product1, price, category),
+        (b, product1, price, category),
+        (c, product1, price, category),
+        (a, product2, price, category),
+        (b, product2, price, category),
+        (c, product2, price, category)
+    ]
+    products_ordered = {a: [product1, product2, product3], b: [product1, product2, product3], c: [product1, product2, product3]}
+<\my_psuedo_code>
+
+2. Classify products by category
+• Use a dictionary to map each product to its respective category
+• Create a set of unique product categories
+• Display all available product categories
+
+<my_psuedo_code>
+    product_categories = {
+        product1: category1, 
+        product2: category2,
+        product3: category3,
+        .
+        .
+        .        
+    }
+    unique_categories = set(category for category in product_categories.values())
+OR (both work)
+    unique_categories = set()
+    for category in product_categories.values()
+        unique_categories.add(category)
+
+    print(f"Here are all available product categories: {unique_categories})
+<\my_psuedo_code>
+
+3. Analyze customer orders
+• Use a loop to calculate the total amount each customer spends
+• If the total purchase value is above $100, classify the customer as a high-value buyer
+• If it is between $50 and $100, classify the customer as a moderate buyer
+• If it is below $50, classify them as a low-value buyer
+
+<single-loop approach>
+customer_total_spent = {}
+for customer in customers:
+    customer_total_spent[customer] = 0
+
+
+for transaction in transaction_logs:
+    transaction_amount = transaction[2]
+    customer = transaction[0]
+    customer_total_spent[customer] += transaction_amount
+
+
+
+for customer in customers:
+    total = customer_total_spent[customer]
+    if total > 100:
+        customer_classification[customer] = "high-value buyer"
+    elif total < 50:
+        customer_classification[customer] = "low-value buyer"
+    else:
+        customer_classification[customer] = "moderate buyer"
+<\single-loop approach>
+
+<nested-loop approach>
+    customer_total_spent = {}
+    customer_classification = {}
+
+    for customer in customers:
+        customer_total_spent[customer] = 0
+
+        for transaction in transaction_logs:
+            transaction_amount = transaction[2]
+            if transaction[0] == customer:
+                customer_total_spent[customer] += transaction_amount
+
+        if customer_total_spent[cusotmer] > 100:
+            customer_classification[customer] = "high-value buyer"
+        elif customer_total_spent[customer] < 50:
+            customer_classification[customer] = "low-value buyer"
+        else:
+            customer_classification[customer] = "moderate buyer"
+<\nested-loop approach>
+
+4. Generate business insights
+• Calculate the total revenue per product category and store it in a dictionary
+• Extract unique products from all orders using a set
+• Use a list comprehension to find all customers who purchased electronics
+• Identify the top three highest-spending customers using sorting
+
+<my_psuedo_code>
+    product_category_revenues = {}
+
+    for category in unique_categories:
+    product_category_revenues[category] = 0
+        for transaction in transaction_logs:
+            transaction_amount = transaction[2]
+            transaction_category = transaction[3]
+            if transaction_category = category:
+                product_category_revenues[category] += transaction_amount
+            
+    unique_products = set()
+    for transaction in transaction_logs:
+        unique_products.add(transaction[1])
+*** --- OR --- ***
+    unique_products = set(transaction[1] for transaction in transaction_logs)
+
+    # build a set of products within the "electronics" category
+    electronic_products = {product for product, category in product_categories.items() if category == "electronics"}
+    
+    # for each customer's list of products ordered (product_ordered dictionary), if at least one purchased product is in the electronics product list,
+    # add the customer to list of electronics_customers.
+    
+    VERSION A (using any()):
+    # Include the customer if any product they bought is electronics.
+    # would require that electronic_products be a list and not a set in the previous step
+    electronics_customers = [
+        customer
+        for customer, product_list in products_ordered.items()
+        if any(
+            product in electronics_products 
+            for product in product_list
+            )
+    ]
+
+    VERSION B (using sets->intersection) <--- BETTER!
+    # Include the customer if their purchased products overlap with electronics.
+    electronics_customers_set = [
+        customer
+        for customer, product_list in products_ordered.items()
+        if set(product_list) & electronic_products
+    ]
+
+    # sort the customer_total_spent dictionary on the values in descending order, then print the first three in the dictionary
+    # Take the customer-total-spent dictionary,
+    # turn it into (customer, total) pairs,
+    # sort those pairs by total spent (highest first),
+    # and keep only the top three.
+    top_three_customers = sorted(
+        customer_total_spent.items(),
+        key=lambda item: item[1],
+        reverse=True
+    )[:3]
+
+
+<\my_psuedo_code>
+
+5. Organize and display data
+• Print a summary of each customer’s total spending and their classification
+• Use set operations to find customers who purchased from multiple categories
+• Identify common customers who bought both electronics and clothing
+
+<my_psuedo_code>
+    # for every customer in the master 'customers' list, print the values of the customer_total_spent dictionary (to show each customer's total spending)
+    # and the values in the customer_classification dictionary (to show their classification)
+    
+    for customer in customers:
+        total = customer_total_spent[customer]
+        classification = customer_classification[customer]
+        print(f"{customer}: spent ${total}, classified as {classification}")
+
+
+    # For each customer:
+    # Look at their purchased products, using products_ordered
+    # Map each product to its category, using product_categories
+    # Put those categories into a set
+    # If the set size > 1 → include that customer as they purchased from multiple categories
+
+    multi_category_customers = []
+    for customer in customers:
+        categories_purchased = set()
+        for product in products_ordered[customer]:
+            categories_purchased.add(product_categories[product])
+        if len(categories_purchased) > 1:
+            multi_category_customers.append(customer)
+    print(f"{multi_category_customers} all purchased from multiple categories.")
+    
+
+    # For each customer:
+    # look at their purchased products, using products_ordered
+    # look up the category for each product, using product_categories
+    # check if the categories a customer purchased include BOTH "electronics" and "clothing" 
+    # if so, include that customer as they purchased both categories
+
+    common_category_customers = []
+    categories_required = {"electronics", "clothing"}
+    for customer in customers:
+        categories_purchased = set()
+        for product in products_ordered[customer]:
+            categories_purchased.add(product_categories[product])
+        if categories_required <= categories_purchased: # Is categories_required a subset of categories_purchased: Return True if all items in set categories_required are present in set categories_purchased
+            common_category_customers.append(customer)
+    print(f"{common_category_customers} all purchased from both electronics and clothing categories.")
+
+
+<\my_psuedo_code>

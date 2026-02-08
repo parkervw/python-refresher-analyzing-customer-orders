@@ -1,0 +1,65 @@
+Course-End Project
+Analyzing Customer Orders Using Python
+Overview
+In this project, you will analyze customer orders using Python data structures to classify
+products, identify customer purchasing patterns, and generate business insights. This
+analysis will help you understand which products are most popular, which customers
+are high-value, and how purchase behavior varies across different categories. You will
+leverage lists, tuples, dictionaries, and sets, along with loops and conditionals, to
+process and organize customer order data efficiently.
+Instructions
+Submission: Submit a comprehensive report including customer classification, product
+category analysis, and key business insights
+Tools: Python (for data processing and analysis)
+Dataset: None
+Situation
+You are working as a data analyst for an e-commerce company. Your task is to process
+and analyze customer orders to generate meaningful insights. Your company sells a
+variety of products across different categories, such as Electronics, Clothing, and Home
+Essentials. You need to determine which products are frequently purchased, classify
+customers based on their total spending, and analyze the most profitable product
+categories.
+To achieve this, you will store, categorize, and analyze customer purchase data using
+Python's built-in data structures (lists, tuples, dictionaries, and sets) and control
+structures (loops and conditionals). The final output will help business managers make
+data-driven decisions regarding marketing strategies and inventory management.
+Tasks
+1. Store customer orders
+• Create a list of customer names
+• Store each customer's order details (customer name, product, price, category) as
+tuples inside a list
+• Use a dictionary where keys are customer names and values are lists of ordered
+products
+2. Classify products by category
+• Use a dictionary to map each product to its respective category
+• Create a set of unique product categories
+• Display all available product categories
+3. Analyze customer orders
+• Use a loop to calculate the total amount each customer spends
+• If the total purchase value is above $100, classify the customer as a high-value buyer
+• If it is between $50 and $100, classify the customer as a moderate buyer
+• If it is below $50, classify them as a low-value buyer
+4. Generate business insights
+• Calculate the total revenue per product category and store it in a dictionary
+• Extract unique products from all orders using a set
+• Use a list comprehension to find all customers who purchased electronics
+• Identify the top three highest-spending customers using sorting
+5. Organize and display data
+• Print a summary of each customer’s total spending and their classification
+• Use set operations to find customers who purchased from multiple categories
+• Identify common customers who bought both electronics and clothing
+Actions
+Customer order processing in python
+• Store customer order data using lists, tuples, and dictionaries
+• Retrieve and modify customer records using dictionary methods
+Classification and analysis
+• Use loops to categorize customers based on their total spending
+• Use set operations to find common and unique products across different categories
+Insight generation
+• Extract the high-value customers and most frequently purchased products
+• Identify trends based on category-wise sales
+Result
+The final deliverable will be a detailed report summarizing customer classifications, total
+sales per category, and key insights about purchase behavior. This project demonstrates
+how Python’s data structures can be used to analyze real-world e-commerce data,
+helping businesses make informed decisions.
