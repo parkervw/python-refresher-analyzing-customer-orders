@@ -1,7 +1,10 @@
 # Python Refresher Course: Project 1: Analyzing Customer Orders
 # Author: Parker Van Wagoner
 # Date: February 2026
- 
+
+HIGH_VALUE_THRESHOLD = 100
+MODERATE_VALUE_THRESHOLD = 50
+
 customers = [
 	"Ava Mitchell",
 	"Noah Parker",
@@ -98,9 +101,9 @@ for transaction in transaction_logs:
 customer_classification = {}
 for customer in customers:
 	total = customer_total_spent[customer]
-	if total > 100:
+	if total > HIGH_VALUE_THRESHOLD:
 		customer_classification[customer] = "high-value buyer"
-	elif total < 50:
+	elif total < MODERATE_VALUE_THRESHOLD:
 		customer_classification[customer] = "low-value buyer"
 	else:
 		customer_classification[customer] = "moderate buyer"
