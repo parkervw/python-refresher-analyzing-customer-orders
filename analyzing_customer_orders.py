@@ -123,15 +123,11 @@ for classification, count in classification_counts.items():
 print()
 
 # Task 4: Generate business insights
-# Calculate total revenue per product category
-product_category_revenues = {}
-for category in unique_categories:
-	product_category_revenues[category] = 0
-	for transaction in transaction_logs:
-		transaction_amount = transaction[2]
-		transaction_category = transaction[3]
-		if transaction_category == category:
-			product_category_revenues[category] += transaction_amount
+# Calculate total revenue per product category (single-pass)
+product_category_revenues = {category: 0 for category in unique_categories}
+for customer, product, transaction_amount, transaction_category in transaction_logs:
+	if transaction_category in product_category_revenues:
+		product_category_revenues[transaction_category] += transaction_amount
 
 # Extract unique products from all orders using a set
 unique_products = set(transaction[1] for transaction in transaction_logs)
